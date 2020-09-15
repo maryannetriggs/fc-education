@@ -1,11 +1,4 @@
-const { TestScheduler } = require("jest");
-
-filterByTerm = (inputArr, searchTerm) => {
-    if (!searchTerm) throw Error('Empty search term');
-    return inputArr.filter(function(arrayElement) {
-        return arrayElement.url.match(searchTerm.toLowerCase());
-    });
-};
+const filterByTerm = require("../src/filterByTerm");
 
 describe('Filter function', () => {
     test('it should filter a function by a search term (link)', () => {
@@ -34,10 +27,20 @@ describe('Filter function', () => {
             expect(filterByTerm(input, 'uRL')).toEqual(output);
     })
 
-    test("it should throw when searchTerm is empty string", () => {
-        const input = [];
+    test("it should throw an error when searchTerm is empty string", () => {
+        const input = [
+            { id: 1, url: 'htps://url1.dev' },
+            { id: 2, url: 'htps://url2.dev'} ,
+            { id: 3, url: 'htps://link3.dev' },
+        ];
         expect(() => {filterByTerm(input, '');
         }).toThrowError(Error('Empty search term'));
+    });
+
+    test("it should throw an error when the input array is empty", () => {
+        const input = [];
+        expect(() => {filterByTerm(input, 'link');
+        }).toThrowError(Error('inputArr cannot be empty'));
     });
     
 });

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+/* Basic styling to make button large enough to see without internal text */
+button {
+  font-size: large;
+  width: 300px;
+  height: 30px;
+}
